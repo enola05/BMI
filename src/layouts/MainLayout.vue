@@ -13,19 +13,20 @@
           class="q-mr-sm"
         />
 
-        <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
+        <q-toolbar-title
+          v-if="$q.screen.gt.xs"
+          shrink
+          class="row items-center no-wrap"
+        >
           <span class="q-ml-sm">DEVKIT </span>
         </q-toolbar-title>
 
         <q-space />
 
-
-
         <div class="q-gutter-sm row items-center no-wrap">
-
           <q-btn round flat>
             <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
             </q-avatar>
             <q-tooltip>Account</q-tooltip>
           </q-btn>
@@ -42,7 +43,14 @@
     >
       <q-scroll-area class="fit">
         <q-list padding class="text-grey-8">
-          <q-item class="GNL__drawer-item" v-ripple v-for="link in links1" :key="link.text" clickable @click.native="$router.push(link.link)">
+          <q-item
+            class="GNL__drawer-item"
+            v-ripple
+            v-for="link in links1"
+            :key="link.text"
+            clickable
+            @click.native="$router.push(link.link)"
+          >
             <q-item-section avatar>
               <q-icon :name="link.icon" />
             </q-item-section>
@@ -55,11 +63,26 @@
 
           <div class="q-mt-md">
             <div class="flex flex-center q-gutter-xs">
-              <a class="GNL__drawer-footer-link" href="javascript:void(0)" aria-label="Privacy">Privacy</a>
+              <a
+                class="GNL__drawer-footer-link"
+                href="javascript:void(0)"
+                aria-label="Privacy"
+                >Privacy</a
+              >
               <span> · </span>
-              <a class="GNL__drawer-footer-link" href="javascript:void(0)" aria-label="Terms">Terms</a>
+              <a
+                class="GNL__drawer-footer-link"
+                href="javascript:void(0)"
+                aria-label="Terms"
+                >Terms</a
+              >
               <span> · </span>
-              <a class="GNL__drawer-footer-link" href="javascript:void(0)" aria-label="About">About ELC</a>
+              <a
+                class="GNL__drawer-footer-link"
+                href="javascript:void(0)"
+                aria-label="About"
+                >About ELC</a
+              >
             </div>
           </div>
         </q-list>
@@ -73,38 +96,38 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { fasEarthAmericas, fasFlask } from '@quasar/extras/fontawesome-v6'
+import { ref } from "vue";
+import { fasEarthAmericas, fasFlask } from "@quasar/extras/fontawesome-v6";
 
 export default {
-  name: 'GoogleNewsLayout',
+  name: "GoogleNewsLayout",
 
-  setup () {
-    const leftDrawerOpen = ref(false)
-    const search = ref('')
-    const showAdvanced = ref(false)
-    const showDateOptions = ref(false)
-    const exactPhrase = ref('')
-    const hasWords = ref('')
-    const excludeWords = ref('')
-    const byWebsite = ref('')
-    const byDate = ref('Any time')
+  setup() {
+    const leftDrawerOpen = ref(false);
+    const search = ref("");
+    const showAdvanced = ref(false);
+    const showDateOptions = ref(false);
+    const exactPhrase = ref("");
+    const hasWords = ref("");
+    const excludeWords = ref("");
+    const byWebsite = ref("");
+    const byDate = ref("Any time");
 
-    function onClear () {
-      exactPhrase.value = ''
-      hasWords.value = ''
-      excludeWords.value = ''
-      byWebsite.value = ''
-      byDate.value = 'Any time'
+    function onClear() {
+      exactPhrase.value = "";
+      hasWords.value = "";
+      excludeWords.value = "";
+      byWebsite.value = "";
+      byDate.value = "Any time";
     }
 
-    function changeDate (option) {
-      byDate.value = option
-      showDateOptions.value = false
+    function changeDate(option) {
+      byDate.value = option;
+      showDateOptions.value = false;
     }
 
-    function toggleLeftDrawer () {
-      leftDrawerOpen.value = !leftDrawerOpen.value
+    function toggleLeftDrawer() {
+      leftDrawerOpen.value = !leftDrawerOpen.value;
     }
 
     return {
@@ -119,21 +142,18 @@ export default {
       byDate,
 
       links1: [
-        { icon: 'web', text: 'BMI',link:"/bmi" },
+        { icon: "web", text: "BMI", link: "/bmi" },
+        { icon: "schedule", text: "TIME", link: "/time" },
       ],
-      links2: [
-        { icon: 'flag', text: 'Canada' ,link:"/bmi"},
-      ],
-      links3: [
-        { icon: '', text: 'Language & region',link:"/bmi" },
-      ],
+      links2: [{ icon: "flag", text: "Canada", link: "/bmi" }],
+      links3: [{ icon: "", text: "Language & region", link: "/bmi" }],
 
       onClear,
       changeDate,
-      toggleLeftDrawer
-    }
-  }
-}
+      toggleLeftDrawer,
+    };
+  },
+};
 </script>
 
 <style lang="sass">
