@@ -35,19 +35,34 @@
               <q-card-section>
                 <q-time v-model="data.alarmTime" format="hh:mm A" />
               </q-card-section>
-              <q-card-section>
+              <q-card-section class="text-center">
                 <q-btn color="primary" @click="setAlarm">Set Alarm</q-btn>
-                <q-btn color="primary" @click="stopAlarm">Stop Alarm</q-btn>
               </q-card-section>
             </q-card>
           </q-tab-panel>
         </q-tab-panels>
+        <!-- q-dialog for alarm -->
+        <q-dialog v-model="data.isAlarmRinging" persistent>
+          <q-card>
+            <q-card-section>
+              <div class="text-h6">Alarm</div>
+            </q-card-section>
+            <q-card-section>
+              <div>Time's up! Your alarm is ringing!</div>
+            </q-card-section>
+            <q-card-actions align="right">
+              <q-btn label="Dismiss" color="primary" @click="stopAlarm()" />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
       </div>
     </div>
   </q-page>
 </template>
 <script setup>
 import { reactive, computed, watch } from "vue";
+import { Dialog } from "quasar";
+
 const data = reactive({
   tab: "timer",
   running: false,
@@ -57,6 +72,7 @@ const data = reactive({
   alarmTime: new Date(),
   alarmInterval: null,
   isAlarmRinging: false,
+  audio: new Audio(),
 });
 
 const formattedTime = computed(() => {
@@ -102,26 +118,44 @@ const setAlarm = () => {
     console.log("alarmTimeValue", alarmTimeValue);
     const currentTime = new Date();
     const timeDifference = alarmTimeValue - currentTime;
-
+    console.log(timeDifference);
     if (timeDifference <= 0) {
       console.log("Alarm!");
-      data.isAlarmRinging = true;
-      stopAlarm(); // Stop the alarm when it's time
+      playAlarmSound();
+      //   stopAlarm(); // Stop the alarm when it's time
     }
   }, 1000);
 };
+const playAlarmSound = () => {
+  if (!data.isAlarmRinging) {
+    console.log("play", data.audio);
+    data.audio = new Audio("./src/pages/mixkit-classic-alarm-995.wav");
+    data.audio.play();
+    data.isAlarmRinging = true;
+  }
+};
 
+// Function to stop the alarm
+const stopAlarm = () => {
+  console.log("Stopping alarm...");
+  clearInterval(data.alarmInterval);
+  data.isAlarmRinging = false;
+
+  if (data.audio) {
+    console.log("Pausing audio...");
+    data.audio.pause();
+    data.audio.currentTime = 0;
+
+    data.audio = null;
+  } else {
+    console.log("No audio element found.");
+  }
+};
 // Function to parse a time string into a Date object
 const parseTime = (timeString) => {
   const [hours, minutes] = timeString.split(":").map(Number);
   const date = new Date();
   date.setHours(hours, minutes, 0, 0);
   return date;
-};
-
-// Function to stop the alarm
-const stopAlarm = () => {
-  clearInterval(data.alarmInterval);
-  data.isAlarmRinging = false;
 };
 </script>
