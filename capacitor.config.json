@@ -1,0 +1,5 @@
+{
+  "appId": "com.devkit.pack",
+  "appName": "devkit",
+  "webDir": "dist/spa"
+}
