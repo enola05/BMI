@@ -144,6 +144,7 @@ export default {
       links1: [
         { icon: "web", text: "BMI", link: "/bmi" },
         { icon: "schedule", text: "TIME", link: "/time" },
+        { icon: "account_tree", text: "Unit converter", link: "/unit" },
       ],
       links2: [{ icon: "flag", text: "Canada", link: "/bmi" }],
       links3: [{ icon: "", text: "Language & region", link: "/bmi" }],

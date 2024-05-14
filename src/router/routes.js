@@ -10,6 +10,11 @@ const routes = [
     children: [{ path: "", component: () => import("pages/time.vue") }],
   },
   {
+    path: "/unit",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/unit.vue") }],
+  },
+  {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/bmi.vue") }],
